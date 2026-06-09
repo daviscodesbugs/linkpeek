@@ -40,7 +40,7 @@ export default {
 			return json({ ok: true, version: VERSION });
 		}
 
-		return json({ error: "Not found. See https://linkpeek.hiveserver.xyz/ for docs." }, 404);
+		return json({ error: "Not found. See https://linkpeek.dpears.workers.dev/ for docs." }, 404);
 	},
 };
 
@@ -80,7 +80,7 @@ async function handlePreview(request, url, env, ctx) {
 			return json(
 				{
 					error: `Free demo limit (${FREE_DAILY_LIMIT}/day) reached. Subscribe for higher limits.`,
-					subscribe: "https://linkpeek.hiveserver.xyz/#pricing",
+					subscribe: "https://linkpeek.dpears.workers.dev/#pricing",
 				},
 				429,
 			);
@@ -169,7 +169,7 @@ async function fetchWithTimeout(href) {
 			signal: controller.signal,
 			redirect: "follow",
 			headers: {
-				"user-agent": "Mozilla/5.0 (compatible; LinkPeekBot/1.0; +https://linkpeek.hiveserver.xyz)",
+				"user-agent": "Mozilla/5.0 (compatible; LinkPeekBot/1.0; +https://linkpeek.dpears.workers.dev)",
 				accept: "text/html,application/xhtml+xml,*/*;q=0.8",
 				"accept-language": "en-US,en;q=0.9",
 			},
