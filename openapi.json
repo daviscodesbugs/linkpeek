@@ -1,0 +1,103 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "LinkPeek - Link Preview and OpenGraph Metadata",
+		"version": "1.0.0",
+		"description": "Fast link preview API: extract title, description, images, favicon, site name, canonical URL, RSS feeds, oEmbed endpoint, and full OpenGraph + Twitter Card metadata from any URL as clean JSON. Edge-cached, SSRF-safe, CORS enabled."
+	},
+	"servers": [
+		{ "url": "https://linkpeek.dpears.workers.dev" }
+	],
+	"paths": {
+		"/v1/preview": {
+			"get": {
+				"operationId": "getLinkPreview",
+				"summary": "Get Link Preview",
+				"description": "Extract metadata from any public URL: title, description, images, favicon, siteName, canonical, RSS feeds, oEmbed endpoint, plus full OpenGraph and Twitter Card maps.",
+				"parameters": [
+					{
+						"name": "url",
+						"in": "query",
+						"required": true,
+						"description": "The absolute http(s) URL to extract metadata from.",
+						"schema": { "type": "string", "format": "uri" },
+						"example": "https://github.com"
+					},
+					{
+						"name": "fresh",
+						"in": "query",
+						"required": false,
+						"description": "Set to 'true' to bypass the 24h cache (paid plans only).",
+						"schema": { "type": "string", "enum": ["true", "false"] }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Extracted metadata",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"url": { "type": "string" },
+										"finalUrl": { "type": "string" },
+										"status": { "type": "integer" },
+										"contentType": { "type": "string" },
+										"fetchedAt": { "type": "string", "format": "date-time" },
+										"title": { "type": "string", "nullable": true },
+										"description": { "type": "string", "nullable": true },
+										"siteName": { "type": "string", "nullable": true },
+										"image": { "type": "string", "nullable": true },
+										"images": { "type": "array", "items": { "type": "string" } },
+										"favicon": { "type": "string", "nullable": true },
+										"author": { "type": "string", "nullable": true },
+										"published": { "type": "string", "nullable": true },
+										"type": { "type": "string", "nullable": true },
+										"locale": { "type": "string", "nullable": true },
+										"canonical": { "type": "string", "nullable": true },
+										"feeds": { "type": "array", "items": { "type": "string" } },
+										"oembed": { "type": "string", "nullable": true },
+										"twitter": { "type": "object", "additionalProperties": { "type": "string" } },
+										"og": { "type": "object", "additionalProperties": { "type": "string" } },
+										"cached": { "type": "boolean" }
+									}
+								},
+								"example": {
+									"url": "https://github.com/",
+									"title": "GitHub · Change is constant.",
+									"description": "Join the world's most widely adopted AI-powered developer platform.",
+									"siteName": "GitHub",
+									"image": "https://images.ctfassets.net/example.png",
+									"favicon": "https://github.com/fluidicon.png",
+									"canonical": "https://github.com/",
+									"og": { "site_name": "GitHub", "type": "object" },
+									"twitter": { "site": "@github", "card": "summary_large_image" }
+								}
+							}
+						}
+					},
+					"400": { "description": "Missing or invalid url parameter" },
+					"429": { "description": "Rate limit exceeded" },
+					"502": { "description": "Target URL could not be fetched" }
+				}
+			}
+		},
+		"/v1/health": {
+			"get": {
+				"operationId": "healthCheck",
+				"summary": "Health Check",
+				"description": "Service status and version.",
+				"responses": {
+					"200": {
+						"description": "Service is healthy",
+						"content": {
+							"application/json": {
+								"example": { "ok": true, "version": "1.0.0" }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
