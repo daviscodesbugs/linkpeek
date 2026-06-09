@@ -1,0 +1,38 @@
+{
+	"name": "linkpeek-client",
+	"version": "1.0.0",
+	"description": "Tiny zero-dependency client for the LinkPeek link preview & OpenGraph metadata API — title, description, images, favicon, feeds & oEmbed from any URL",
+	"keywords": [
+		"link-preview",
+		"opengraph",
+		"og",
+		"twitter-card",
+		"metadata",
+		"unfurl",
+		"oembed",
+		"favicon",
+		"scraper",
+		"url-preview",
+		"link-unfurl"
+	],
+	"homepage": "https://github.com/daviscodesbugs/linkpeek#readme",
+	"bugs": "https://github.com/daviscodesbugs/linkpeek/issues",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/daviscodesbugs/linkpeek.git",
+		"directory": "packages/linkpeek-client"
+	},
+	"license": "MIT",
+	"author": "daviscodesbugs <daviscodesbugs@gmail.com>",
+	"type": "module",
+	"main": "index.js",
+	"types": "index.d.ts",
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"README.md"
+	],
+	"engines": {
+		"node": ">=18"
+	}
+}

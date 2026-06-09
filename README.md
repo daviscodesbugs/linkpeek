@@ -67,18 +67,6 @@ Service status + version.
 
 👉 **[Subscribe on RapidAPI](https://rapidapi.com/davispearson93/api/linkpeek-link-preview-and-opengraph-metadata/pricing)** — instant key, managed billing, cancel anytime.
 
-## Self-hosting
-
-It's a single-file Cloudflare Worker:
-
-```bash
-npm i -g wrangler
-wrangler kv namespace create CACHE   # put the id in wrangler.toml
-wrangler deploy
-```
-
-Optional secrets: `RAPIDAPI_PROXY_SECRET` (marketplace gateway auth), `DIRECT_KEYS` (comma-separated API keys).
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
