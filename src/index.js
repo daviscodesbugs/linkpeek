@@ -329,12 +329,12 @@ Returns title, description, images, favicon, site name, canonical URL, RSS feeds
 
 <h2 id="pricing">Pricing</h2>
 <div class="card">
-<p><span class="price">$0</span>/mo — Demo: 25 req/day, fair use</p>
-<p><span class="price">$5</span>/mo — Hobby: 10,000 req/mo</p>
-<p><span class="price">$15</span>/mo — Pro: 100,000 req/mo, cache-bypass with <code>fresh=true</code></p>
-<p class="muted">Subscribe via RapidAPI (listing pending review) or grab a direct key by emailing
+<p><span class="price">$0</span>/mo — BASIC: 500 req/mo (25/day anonymous demo, no signup)</p>
+<p><span class="price">$5</span>/mo — PRO: 10,000 req/mo</p>
+<p><span class="price">$15</span>/mo — ULTRA: 100,000 req/mo, cache-bypass with <code>fresh=true</code></p>
+<p class="muted">Subscribe on RapidAPI — instant API key, managed billing, cancel anytime. Prefer a direct key? Email
 <a href="mailto:davispearson93+linkpeek@gmail.com">davispearson93+linkpeek@gmail.com</a>.</p>
-<a class="btn" href="mailto:davispearson93+linkpeek@gmail.com?subject=LinkPeek%20API%20key&body=Plan%20(Hobby%20%245%2Fmo%20or%20Pro%20%2415%2Fmo)%3A">Get an API key</a>
+<a class="btn" href="https://rapidapi.com/davispearson93/api/linkpeek-link-preview-and-opengraph-metadata/pricing">Subscribe on RapidAPI →</a>
 </div>
 
 <h2>Docs</h2>
