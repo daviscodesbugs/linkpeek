@@ -1,0 +1,12 @@
+name = "linkpeek"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+workers_dev = true
+
+[observability]
+enabled = true
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "fc8200c765f144eab00f1f132cdd6f8e"
