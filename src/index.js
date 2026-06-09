@@ -333,7 +333,7 @@ Returns title, description, images, favicon, site name, canonical URL, RSS feeds
 <p><span class="price">$5</span>/mo — PRO: 10,000 req/mo</p>
 <p><span class="price">$15</span>/mo — ULTRA: 100,000 req/mo, cache-bypass with <code>fresh=true</code></p>
 <p class="muted">Subscribe on RapidAPI — instant API key, managed billing, cancel anytime. Prefer a direct key? Email
-<a href="mailto:davispearson93+linkpeek@gmail.com">davispearson93+linkpeek@gmail.com</a>.</p>
+<a href="mailto:daviscodesbugs@gmail.com">daviscodesbugs@gmail.com</a>.</p>
 <a class="btn" href="https://rapidapi.com/davispearson93/api/linkpeek-link-preview-and-opengraph-metadata/pricing">Subscribe on RapidAPI →</a>
 </div>
 
