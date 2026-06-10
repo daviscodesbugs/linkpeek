@@ -326,8 +326,52 @@ a{color:var(--acc)}
 
 <div class="card">
 <strong>Try it right now</strong> (free, no signup — 25 requests/day):
-<pre><code>curl "https://linkpeek.dpears.workers.dev/v1/preview?url=https://github.com"</code></pre>
+<div style="display:flex;gap:8px;margin:12px 0">
+<input id="demo-url" type="url" placeholder="https://example.com" value="https://github.com" style="flex:1;padding:10px 12px;border-radius:8px;border:1px solid #1e2a4a;background:#0a0f1f;color:#e2e8f0;font-size:.95rem">
+<button id="demo-btn" style="background:#5eead4;color:#0b1020;font-weight:700;border:0;border-radius:8px;padding:10px 18px;cursor:pointer">Peek</button>
+</div>
+<div id="demo-card" style="display:none;border:1px solid #1e2a4a;border-radius:8px;padding:14px;margin:10px 0;display:none"></div>
+<pre id="demo-json" style="display:none;max-height:300px;overflow:auto"></pre>
+<pre id="demo-curl"><code>curl "https://linkpeek.dpears.workers.dev/v1/preview?url=https://github.com"</code></pre>
 Returns title, description, images, favicon, site name, canonical URL, RSS feeds, oEmbed endpoint, full OpenGraph + Twitter Card maps, and more — as clean JSON.
+<script>
+document.getElementById('demo-btn').addEventListener('click', runDemo);
+document.getElementById('demo-url').addEventListener('keydown', e => { if (e.key === 'Enter') runDemo(); });
+async function runDemo() {
+  const u = document.getElementById('demo-url').value.trim();
+  if (!u) return;
+  const btn = document.getElementById('demo-btn');
+  btn.textContent = '…'; btn.disabled = true;
+  const cardEl = document.getElementById('demo-card');
+  const jsonEl = document.getElementById('demo-json');
+  try {
+    const res = await fetch('/v1/preview?url=' + encodeURIComponent(u));
+    const data = await res.json();
+    jsonEl.style.display = 'block';
+    jsonEl.textContent = JSON.stringify(data, null, 2);
+    if (data.title || data.image) {
+      cardEl.style.display = 'block';
+      cardEl.innerHTML = '';
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:14px;align-items:flex-start';
+      if (data.image) { const img = document.createElement('img'); img.src = data.image; img.style.cssText = 'width:120px;height:90px;object-fit:cover;border-radius:6px;flex-shrink:0'; img.onerror = () => img.remove(); wrap.appendChild(img); }
+      const txt = document.createElement('div');
+      const t = document.createElement('div'); t.textContent = data.title || ''; t.style.cssText = 'font-weight:700;margin-bottom:4px';
+      const d = document.createElement('div'); d.textContent = (data.description || '').slice(0, 180); d.style.cssText = 'color:#94a3b8;font-size:.88rem';
+      const s = document.createElement('div'); s.style.cssText = 'color:#5eead4;font-size:.8rem;margin-top:6px;display:flex;gap:6px;align-items:center';
+      if (data.favicon) { const f = document.createElement('img'); f.src = data.favicon; f.style.cssText = 'width:14px;height:14px'; f.onerror = () => f.remove(); s.appendChild(f); }
+      s.appendChild(document.createTextNode(data.siteName || ''));
+      txt.appendChild(t); txt.appendChild(d); txt.appendChild(s); wrap.appendChild(txt);
+      cardEl.appendChild(wrap);
+    }
+    document.getElementById('demo-curl').querySelector('code').textContent = 'curl "https://linkpeek.dpears.workers.dev/v1/preview?url=' + u + '"';
+  } catch (e) {
+    jsonEl.style.display = 'block';
+    jsonEl.textContent = 'Request failed: ' + e.message;
+  }
+  btn.textContent = 'Peek'; btn.disabled = false;
+}
+</script>
 </div>
 
 <h2>Why LinkPeek?</h2>
