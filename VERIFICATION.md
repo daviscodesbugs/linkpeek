@@ -29,3 +29,13 @@
 - Sites behind aggressive bot protection (e.g. stackoverflow.com) return their challenge
   page status (403) — reported truthfully in `status`; not a defect.
 - Billing plans verified live on the listing: BASIC $0/500mo, PRO $5/10k, ULTRA $15/100k.
+
+## Addendum — rate limit hardening (June 10)
+- DEFECT FOUND during verification: KV-based daily counter alone did not enforce the
+  anon limit under burst (KV is eventually consistent; 27 sequential anon requests → all 200).
+- FIX: added Workers Rate Limiting binding (10 req/min per IP, per-colo accurate) in front
+  of the KV daily cap.
+- VERIFIED: parallel burst of 16 anon requests → 5×200 + 11×429 with subscribe CTA in the
+  error body. Paid tiers (x-api-key, RapidAPI gateway) confirmed unaffected (200s).
+- Direct-key tier now live: DIRECT_KEYS secret set; key stored at `pass show linkpeek/direct-key`;
+  verified fresh=true cache bypass works for that tier.

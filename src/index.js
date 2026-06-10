@@ -71,8 +71,20 @@ async function handlePreview(request, url, env, ctx) {
 	} else if (env.DIRECT_KEYS && apiKey && env.DIRECT_KEYS.split(",").includes(apiKey)) {
 		tier = "direct";
 	} else {
-		// anonymous demo tier: per-IP daily quota via KV
+		// anonymous demo tier: burst limiter (accurate, per-colo) + daily KV cap (eventual)
 		const ip = request.headers.get("cf-connecting-ip") || "0.0.0.0";
+		if (env.ANON_LIMITER) {
+			const { success } = await env.ANON_LIMITER.limit({ key: ip });
+			if (!success) {
+				return json(
+					{
+						error: "Rate limit exceeded (10 requests/minute on the free demo). Subscribe for higher limits.",
+						subscribe: "https://rapidapi.com/davispearson93/api/linkpeek-link-preview-and-opengraph-metadata/pricing",
+					},
+					429,
+				);
+			}
+		}
 		const day = new Date().toISOString().slice(0, 10);
 		const quotaKey = `quota:${ip}:${day}`;
 		const used = parseInt((await env.CACHE.get(quotaKey)) || "0", 10);

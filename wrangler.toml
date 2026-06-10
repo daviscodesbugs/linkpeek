@@ -10,3 +10,9 @@ enabled = true
 [[kv_namespaces]]
 binding = "CACHE"
 id = "fc8200c765f144eab00f1f132cdd6f8e"
+
+[[unsafe.bindings]]
+name = "ANON_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
