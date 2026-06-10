@@ -1,5 +1,10 @@
 # LinkPeek 🔗👀
 
+[![npm](https://img.shields.io/npm/v/linkpeek-client?label=linkpeek-client)](https://www.npmjs.com/package/linkpeek-client)
+[![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
+[![RapidAPI](https://img.shields.io/badge/RapidAPI-subscribe-blue)](https://rapidapi.com/davispearson93/api/linkpeek-link-preview-and-opengraph-metadata)
+[![Blog post](https://img.shields.io/badge/dev.to-launch%20post-black)](https://dev.to/daviscodesbugs/i-built-a-link-preview-api-on-cloudflare-workers-and-learned-kv-is-not-a-counter-3d78)
+
 **Link Preview & OpenGraph metadata API** — one GET request returns title, description, images, favicon, site name, canonical URL, RSS/Atom feeds, oEmbed endpoint, and the full OpenGraph + Twitter Card maps for any public URL. Clean JSON, no HTML soup.
 
 Runs on Cloudflare Workers: global edge network, no cold starts, edge-cached responses.
